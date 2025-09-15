@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 int multiplyAdvanced(int a, int b) {
-  int result = a;
-  for (int i = 0; i < b; i++) {}
-  return result;
+  int result = 0;
+  int positiveB = b.abs();
+
+  for (int i = 0; i < positiveB; i++) {
+    result += a;
+  }
+
+  return b < 0 ? -result : result;
 }
 
 class S3388 extends StatefulWidget {
