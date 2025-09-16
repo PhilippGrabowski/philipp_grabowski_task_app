@@ -2,11 +2,85 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class S5531 extends StatelessWidget {
+class S5531 extends StatefulWidget {
   const S5531({super.key});
+
+  @override
+  State<S5531> createState() => _S5531State();
+}
+
+class _S5531State extends State<S5531> {
+  RandomUser? user;
+  bool isLoadingUser = false;
+
+  void _loadRandomUser() async {
+    setState(() {
+      isLoadingUser = true;
+    });
+    user = await fetchRandomUser();
+    setState(() {
+      isLoadingUser = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Center(
+      child: Column(
+        children: [
+          IconButton(onPressed: _loadRandomUser, icon: Icon(Icons.refresh)),
+          const SizedBox(height: 16),
+          if (isLoadingUser)
+            CircularProgressIndicator()
+          else
+            Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: Colors.blueGrey)),
+              child: user != null
+                  ? Stack(children: [
+                      Image.network(user!.imageUrl,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          alignment: Alignment.centerLeft,
+                          width: double.infinity,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [
+                                Colors.black54,
+                                Colors.black12,
+                              ],
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter)),
+                          child: Text(
+                            '${user!.firstName} ${user!.lastName}',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      )
+                    ])
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Text(
+                        'Klick Refresh-Icon und lade einen zufälligen User',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18, height: 1.5),
+                      ),
+                    ),
+            ),
+        ],
+      ),
+    );
   }
 }
 

@@ -150,39 +150,39 @@ const List<Task> chapter5TaskList = [
   ),
   Task(
     taskModel: t_5_4_1_1,
-    // solution: S5411(),
+    solution: S5411(),
   ),
   Task(
     taskModel: t_5_4_2_1,
-    // solution: S5421(),
+    solution: S5421(),
   ),
   Task(
     taskModel: t_5_4_2_2,
-    // solution: S5422(),
+    solution: S5422(),
   ),
   Task(
     taskModel: t_5_5_1_1,
-    // solution: S5511(),
+    solution: S5511(),
   ),
   Task(
     taskModel: t_5_5_2_1,
-    // solution: S5521(),
+    solution: S5521(),
   ),
   Task(
     taskModel: t_5_5_2_2,
-    // solution: S5522(),
+    solution: S5522(),
   ),
   Task(
     taskModel: t_5_5_2_3,
-    // solution: S5523(),
+    solution: S5523(),
   ),
   Task(
     taskModel: t_5_5_2_4,
-    // solution: S5524(),
+    solution: S5524(),
   ),
   Task(
     taskModel: t_5_5_3_1,
-    // solution: S5531(),
+    solution: S5531(),
   ),
 ];
 const List<Task> chapter6TaskList = [];

@@ -28,7 +28,7 @@ class S5111 extends StatelessWidget {
         Switch(
           activeThumbColor: Colors.orange,
           value: true,
-          onChanged: (bool) {},
+          onChanged: (b) {},
         )
       ],
     );
