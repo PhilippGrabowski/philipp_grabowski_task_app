@@ -17,6 +17,7 @@ class _S5421State extends State<S5421> {
     Category.music,
     Category.sport
   ];
+  int? _enteredIndex;
   late TextEditingController _controller;
 
   @override
@@ -31,27 +32,60 @@ class _S5421State extends State<S5421> {
     super.dispose();
   }
 
+  void _checkInput(String input) {
+    int? number = int.tryParse(input);
+    if (number == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Keine gültige Zahl')));
+      setState(() {
+        _enteredIndex = null;
+      });
+    } else if (number < 0 || number >= categories.length) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Index außerhalb des Bereichs')));
+      setState(() {
+        _enteredIndex = null;
+      });
+    } else {
+      setState(() {
+        _enteredIndex = number;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: categories.length,
-                itemBuilder: (context, index) => Text('Hallo')),
-          ),
-          const SizedBox(height: 16),
-          // TextField(
-          //   controller: _controller,
-          //   decoration: InputDecoration(
-          //     border: OutlineInputBorder(),
-          //     labelText: 'Enter Index',
-          //     fillColor: Colors.white,
-          //   ),
-          // )
-        ],
+                itemBuilder: (context, index) => ListTile(
+                      tileColor:
+                          index == _enteredIndex ? Colors.blue : Colors.white,
+                      title: Text(
+                        categories[index].name.toUpperCase(),
+                        style: TextStyle(
+                            color: index != _enteredIndex
+                                ? Colors.black
+                                : Colors.white),
+                      ),
+                    )),
+            const SizedBox(height: 16),
+            TextField(
+              onChanged: (value) => _checkInput(value),
+              controller: _controller,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter Index',
+                fillColor: Colors.white,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

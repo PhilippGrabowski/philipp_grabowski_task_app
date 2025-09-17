@@ -4,6 +4,15 @@ class S5312 extends StatelessWidget {
   const S5312({super.key});
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Center(
+      child: SizedBox(
+        width: 200,
+        height: 200,
+        child: Image.network(
+          'https://www.amny.com/wp-content/uploads/2022/08/GettyImages-523538287.jpg?quality=51&resize=900,601',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
   }
 }

@@ -1,6 +1,6 @@
 name: task_app
 description: App Akademie Task App
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -36,3 +36,4 @@ flutter:
     - assets/images/
     - assets/images/tasks/
     - assets/animations/
+    - assets/images/tropical-beach-scene.jpg
